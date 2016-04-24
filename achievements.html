@@ -1,0 +1,284 @@
+<!DOCTYPE HTML>
+<!--
+	Escape Velocity by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Project Website</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body class="homepage">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<div id="header-wrapper" class="wrapper">
+					<div id="header">
+
+						<!-- Logo -->
+							<div id="logo">
+								<h1><a href="index.html">Team 5 Project Website</a></h1>
+								<strong><p>ATOS-3</p></strong>
+								
+							</div>
+
+						<!-- Nav -->
+							<nav id="nav">
+
+								<ul>
+									
+                                    
+									
+                                    
+									
+							
+									<li class="current"><a href="index.html">Home</a></li>
+									<li>
+										<a href="#">Documentation</a>
+
+                                         <ul>
+											<li><a href="features.html">1.Features</a></li>
+							<li><a href="background.html">2.Background and Context</a></li>
+							<li><a href="requirement.html">3.Project Requirements</a></li>
+							<li><a href="plans.html">4.Development Plan</a></li>
+							<li><a href="achievements.html">5.Technical Achievements</a></li>
+							<li><a href="testing.html">6.Testing</a></li>
+							<li><a href="progress.html">7. Documents</a></li>											<li><a href="projectmanagement.html">8.Project Management</a></li>
+							<li><a href="reference.html">9.Materials Referenced</a></li>
+							<li><a href="futuredevelopment.html">10.Possible Future Development</a></li>
+											
+                                        </ul>
+
+										
+										
+											
+									</li>
+									<li><a href="https://github.com/heiditan/comp205p-afp.git">Github</a>
+									
+									</li>
+									
+									
+									<li><a href="#.html">Manuals</a>
+
+										<ul>
+											<li><a href="systemmanual.html">System Manual</a></li>
+											<li><a href="usermanual.html">User Manual</a></li>
+                                        </ul>
+
+     
+
+
+									</li>
+									<li><a href="video.html">Videos</a></li>
+									<li><a href="forum.html">Forum</a></li>
+								
+									<li><a href="aboutus.html">About Us</a></li>
+									
+								</ul>
+							</nav>
+
+					</div>
+				</div>
+
+				<div class="wrapper style3">
+					<div class="title" id="team">Achievements</div>
+					<div id="main" class="container">
+
+<strong><p3 style="font-size:200%;">User Authentication</p3><br>
+							<p>We used the Devise gem for user authentication, so it took care of the routes and views for the user sign-in and sign-out processes. However, due to the nature of the alternative financing portal, the application would have two different types of users: SMEs and credit providers. Hence, we decided that the sign-up route should be different for these two users and we needed to customise the user registrations controller from the default one provided by the Devise gem. The customisation resulted in separate registration routes for the different users but one common login route. We set up a polymorphic association so that the User model will be associated with the rolable model. This created a SME and a credit provider model which were associated with the user model as well using the has_one association reference. The routes were then tweaked such that users can only sign up by either “/provider/sign_up” or “/sme/sign_up” and the type of user would be saved in the database under the column “rolable_type”. </p>
+							
+
+							<p>After creating separate sign-up routes for the different users, the registrations view was customised such that a different view will be rendered depending on whether the user chose to sign-up as a SME or credit provider. The view rendered would show a specific set of questions that the users would have to answer. Their responses would serve as the search criteria for the search engine. Most of the responses were saved as a string in the database. For responses where several options can be selected such as the nature of funding sought for SME users or the other form of support offered for credit provider users, they were saved as a string as well with commas separating the multiple options selected. </p>
+
+							<p>Also, before_action :signed_in_user, only was added to the User controller to restrict various actions solely to signed-in users. These include access to the search and instant messaging pages as well as the ability to edit settings and other information. Users who are not signed-in will not be able to view other users’ profile pages as well. All these were done to ensure that people will sign up for an account before making use of the application. </p>
+							<br>
+ 
+
+
+
+
+
+							<strong><p3 style="font-size:200%;">Search Engine </p3><br>
+							<p>We implemented the search engine using the Filterrific gem. We added Filterrific to the User model and then defined the ActiveRecord scopes for the available filters that we have chosen. Filterrific was added to the User controller as well. Using the code from the documentation available on Filterrific, we built the view which would render on first load the Filterrific filter form and a partial that shows the actual list of users. When the filter options are changed, the partial would be updated via AJAX using an additional Javascript template. We also enabled users to access other users’ profile pages adding a link for each user in the “Name of Organisation” column of the list of users.</p>
+							
+                             <p>We decided that the main way to filter the users will be by column values of the database. For each user, their selection for a search criteria would be saved in a column in the database and Filterrific would access the values in order to correctly display the suitable users.</p>
+                             
+                             <p>The search criteria was provided to us by our client and we changed it marginally to suit our search engine better. </p>
+                             <br>
+
+                             <strong><p3 style="font-size:200%;">Profile Page</p3><br>
+                             	<p>As part of the alternative financing portal, each user will have a profile page where they can display information about themselves for other users to view, such as their responses to the various search criteria, their contact details and so on. Using a Ruby on Rails form, users will be able to edit their responses for the search criteria and methods were written in the User controller such that the changes of the various params will be reflected in the database. The user can only edit his own profile page. </p>
+                             	
+                             	<p>Another feature we implemented for the profile page is a HTML5 editor. We used Ckeditor and paperclip gems for this functionality. The paperclip gem was used to manage file uploads while ActiveRecord was used as the backend for file upload support. The model for the CKEditor, which was autoloaded for Rails 4, was generated in the app/models/ckeditor directory. After that, we changed the routes to mount Ckeditor:: Engine and included Ckeditor javascripts in the app/assets/javascripts/application.js file. For deployment, the following Rails.application.config.assets.precompile += %w( ckeditor/* ) was added to the config/initializers/assets.rb file. </p>
+                             	<br>
+                             	<strong><p3 style="font-size:200%;">Instant Messaging Platform</p3><br>
+                             		<p>Faye, Thin and Private Pub gems were used to implement a real-time chat application in the alternative financing portal. We followed a tutorial found online to add such a functionality to our application. A user woud have many conversations and a conversation would have many messages. A conversation model was generated and a conversation would contain a sender_id and recipient_id (both of which are instances of a user). The sender_id and recipient_id would both have to be unique to ensure that there will not be more than one conversation between the same users. Also, two scopes were added: involving and between. Involving would retrieve all existing conversations of the currently signed-in user while between would check whether a conversation is already present between two users before a new one is generated. </p>
+                             		
+                             		<p>A message model was generated as well which has a body, conversation_id and user_id columns. Messages that belong to the same conversation will have the same conversation_id.  </p>
+                             		<p>On the messages page, the list of users is displayed with a send message button beside each user’s name. The button contains the sender_id (which is the id of the currently signed-in user) and the recipient_id. If there is already an existing conversation, that particular conversation_id will be returned by the server using jQuery which will request the respective show page of that conversation with all the associated messages. This conversation data will then be displayed as a pop-up. Conversely, if there is no existing conversation, a new conversation will be created with a  new conversation_id. The conversations controller contains only create and show actions. </p>
+
+
+
+
+
+                             		<p>The servers used for the instant messaging platform are different for the application hosted locally and when it has been deployed on Heroku.</p><br>
+
+ <strong><p3 style="font-size:120%;">Local Host</p3><br>
+                                     
+                             		<p>Using the command rails g private_pub:install, a configuration file and a Rackup file were generated to start the Faye server. Next, the command rackup private_pub.ru –s thin –E production was used to start up the Rack server on a separate terminal window. Private_pub was added to the application’s Javascript manifest file as well. The show view was then created for the conversations controller. The subscribe_to method in the show view will subscribe to the conversation’s path which will be used to publish update notifications. This method is provided by the private_pub javascript required in the application.js manifest file.</p>
+                             		<p>Following this, we created the messages controller which contains the create action which will render a javascript template. The conversation’s path is stored in the @path variable and this path will be used to publish push notifications to the view. In addition, two helper methods self_or_other and message_interlocutor were defined and both take a message as an argument. 
+
+</p><br>
+
+                        <strong><p3 style="font-size:120%;">Deployment</p3><br>
+
+                             		<p>A new application was created on Heroku to stand in as a second server. In the private_pub.yml file of this new application, the production server url would be the url of this Heroku application while the secret_token would be retrieved from the private_pub.yml file of the alternative financing portal application which was previously generated when the Private Pub gem was installed for the portal application. Private Pub, Thin and Foreman gems were installed for this new application and further configurations were made for the Procfile. In addition, a private_pub.ru file was created as well and deploying this new Heroku app would set up the Faye server required for the instant messaging platform. </p>
+                             		<p>For the private_pub.yml file in the alternative financing portal application, the production server url would have to be configured to the url of this new application. 
+
+</p><br>
+
+ <strong><p3 style="font-size:200%;">Styling</p3><br>
+                             		<p>For styling, our team made use of existing styles from the internet and customised it to suit our website better. </p>
+                             		<p>The styling for our website is designed such that user would have a good idea of what the website’s functionalities are. At the same time, when the user is using our website, our styling will not distract the user from the application’s functionalities so that the user can carry out his tasks efficiently.
+
+</p>
+<p>The styling of the website basically contains of the following aspects:</p>
+
+
+<li>Header tags</li>
+<li>Paragraph tags</li>
+<li>Text fields and HTML forms</li>
+<li>Buttons, check-boxes </li>
+<li>Fonts sizes, styles</li>
+<li>Navigation bars</li><br><br>
+
+<strong><p3 style="font-size:160%;">Styling for specific pages:</p3><br><br>
+	<strong><p3 style="font-size:120%;">Sign-up pages:</p3><br>
+		<p>When the user is trying to sign up for an account, he would need to enter his details in text fields provided. We adjusted the length of the text fields so that it will fit the approximate length of the details the user needs to enter, thus saving space for a less cluttered look. </p>
+		<strong><p3 style="font-size:120%;">Search page:</p3><br>
+			<p>For the search page, our group used a similar style as the sign-up pages. In addition, our team also included some “margin attribute” for each element so that the layout would be clearer. Also, we boxed up the specific set of search questions to search for a SME or credit provider so that users will understand on one look which set of questions to use to filter the SME or credit provider users. </p>
+
+
+</div>
+</div>
+
+
+
+
+
+<div id="footer-wrapper" class="wrapper">
+					<div class="title" id="contact">Contact Information</div>
+					<div id="footer" class="container">
+						
+						
+						<div class="row 150%">
+							<div class="6u 12u(mobile)">
+
+								<!-- Contact Form -->
+									<section>
+										<form method="post" action="#">
+											<div class="row 50%">
+												<div class="6u 12u(mobile)">
+													<input type="text" name="name" id="contact-name" placeholder="Name" />
+												</div>
+												<div class="6u 12u(mobile)">
+													<input type="text" name="email" id="contact-email" placeholder="Email" />
+												</div>
+											</div>
+											<div class="row 50%">
+												<div class="12u">
+													<textarea name="message" id="contact-message" placeholder="Message" rows="4"></textarea>
+												</div>
+											</div>
+											<div class="row">
+												<div class="12u">
+													<ul class="actions">
+														<li><input type="submit" class="style1" value="Send" /></li>
+														<li><input type="reset" class="style2" value="Reset" /></li>
+													</ul>
+												</div>
+											</div>
+										</form>
+									</section>
+
+							</div>
+							<div class="6u 12u(mobile)">
+
+								<!-- Contact -->
+									<section class="feature-list small">
+										<div class="row">
+											<div class="6u 12u(mobile)">
+												<section>
+													<h3 class="icon fa-home">Mailing Address</h3>
+													<p>
+														UCL<br />
+														Gower St, London<br />
+														WC1E 6BT
+													</p>
+												</section>
+											</div>
+											<div class="6u 12u(mobile)">
+												<section>
+													<h3 class="icon fa-comment">Social</h3>
+													<p>
+														<a href="http://www.ucl.ac.uk/">http://www.ucl.ac.uk/</a><br>
+														<a href="http://uk.atos.net/en-uk/home.html">http://uk.atos.net/en-uk/home.html
+														</a><br>
+													</p>
+												</section>
+											</div>
+										</div>
+										<div class="row">
+											<div class="6u 12u(mobile)">
+												<section>
+													<h3 class="icon fa-envelope">Email</h3>
+													<p>
+														<a>heidi.tan.14@ucl.ac.uk</a><br>
+														<a>jiaao.ma.14@ucl.ac.uk</a><br>
+														<a>michael.davison@atos.net</a>
+													</p>
+												</section>
+											</div>
+											<div class="6u 12u(mobile)">
+												<section>
+													
+												</section>
+											</div>
+										</div>
+									</section>
+
+							</div>
+						</div>
+						<hr />
+					</div>
+					<div id="copyright">
+						<ul>
+							<li>&copy; Team5 COMP204P</li><li>Design: <a>HTML5 UP</a></li>
+						</ul>
+					</div>
+				</div>
+
+		</div>
+
+		<!-- Scripts -->
+
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/skel-viewport.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
+
+
+
+
+

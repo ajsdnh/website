@@ -85,22 +85,60 @@
 					</div>
 				</div>
 
-				
-<div class="wrapper style1">
-					<div class="title">Plans for developing PoC</div>
+
+<div class="wrapper style3">
+					<div class="title">System Manual</div>
 					<div id="highlights" class="container">
 
-	<a style= "font-size:200%" href="research.html">Research</a><br><br>
-	<a style= "font-size:200%"href="prototype.html">Prototypes</a><br><br>
-	<a style= "font-size:200%"href="documents/UI.pdf "download>User Interface Development</a><br><br>
-	<a style= "font-size:200%"href="diagram.html">Architectural Diagrams</a><br><br>
+<strong><h2 style="font-size:200%;">System Requirements:</h2></strong><br>
+<li>Ruby Language (version 1.9.3 or newer)</li>
+<li>RubyGems Packaging System (installed with Ruby versions 1.9 and later)</li>
+<li>A working installation of SQLite3 Database</li>
+<br>
+<br>
+<strong><h2 style="font-size:200%;">Databases Used: </h2></strong><br>
+<li>SQLite3 (Development)</li>
+<li>PostGres (Deployment)</li> 
+<br>
+<br>
+<strong><h2 style="font-size:200%;">How to Run the Application Locally:</h2></strong><br>
 
+<h>1.	Install Rails</h><br>
+
+<p>Refer to <a href=http://guides.rubyonrails.org/getting_started.html>http://guides.rubyonrails.org/getting_started.html</a> (Section 3.1 Installing Rails) on how to install Ruby on Rails and get it up and running. </p>
+
+<p>There are various tools available to install Ruby on Rails quickly on different operating systems. Windows users can use Rails Installer (<a href=http://railsinstaller.org/en>http://railsinstaller.org/en</a>) and Mac users can use Tokaido (<a href=https://github.com/tokaido/tokaidoapp>https://github.com/tokaido/tokaidoapp</a>). </p>
+
+<p>For a more detailed guide, refer to <a href=http://railsapps.github.io/installing-rails.html>http://railsapps.github.io/installing-rails.html</a> to install Ruby on Rails depending on your operating system. </p>
+
+<h>2.	Obtain Source Code</h>
+
+<p>Go to the Github Repository and download the source code. The Github link is as follows: <a href=https://github.com/heiditan/comp205p-afp.git>https://github.com/heiditan/comp205p-afp.git</a> </p>
+
+<h>3.	Start up Rails Server</h>
+
+<p>Unzip the file downloaded from Github. Open a command line prompt. Navigate to the downloaded folder using command line. Run the command “rails server”. This may result in a prompt stating that some gems have not been installed. Follow the instructions shown on the terminal window to install the necessary gems. Once installed, run the command again. The terminal window should display something like the image as shown below. </p>
+
+<img src="images/manual.png" style="width:70%;height:70%;">
+<p>Keep this server running and access the application in your web browser 
+	using the link: <a href=http://localhost:3000>http://localhost:3000</a> </p>
+
+
+<h>4.	Start up Rack Server</h>
+<p>This server is essential for the instant messaging platform to work on your local machine. Open a new terminal window. Run the command “rackup private_pub.ru –s thin –E production” to start the Rack server. It is crucial to keep this serving while running the application or else the instant messaging platform will not work. </p>
+
+<h>5.Done!</h> 
+<p>The application should be running smoothly on your local machine. If you encounter any problems, contact the team at heidi.tan.14@ucl.ac.uk or jiaao.ma.14@ucl.ac.uk </p>
 
 
 
 
 </div>
 </div>
+
+
+
+
 
 
 
@@ -202,6 +240,7 @@
 				</div>
 
 		</div>
+
 		<!-- Scripts -->
 
 			<script src="assets/js/jquery.min.js"></script>
@@ -214,3 +253,7 @@
 
 	</body>
 </html>
+
+
+
+
